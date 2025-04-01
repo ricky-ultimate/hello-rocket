@@ -16,8 +16,14 @@ fn index() -> &'static str {
     "This is the start!"
 }
 
+#[get("/hello/<name>")]
+fn hello(name: &str) -> String {
+    format!("Hello, {}", name)
+}
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/hello", routes![index, world, earth])
+    rocket::build()
+        .mount("/hello", routes![index, world, earth])
+        .mount("/", routes![hello])
 }
