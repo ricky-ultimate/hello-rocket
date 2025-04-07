@@ -39,7 +39,7 @@ impl<'r> FromRequest<'r> for User {
                 }
             }
 
-            None => Outcome::Error((Status::Unauthorized, AuthError::MissingCookie))
+            None => Outcome::Forward((Status::Unauthorized, AuthError::MissingCookie))
         }
     }
 }
