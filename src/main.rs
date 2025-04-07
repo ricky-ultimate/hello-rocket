@@ -15,7 +15,6 @@ struct User {
 
 #[derive(Debug)]
 enum AuthError {
-    MissingCookie,
     InvalidCookie,
 }
 
@@ -39,7 +38,7 @@ impl<'r> FromRequest<'r> for User {
                 }
             }
 
-            None => Outcome::Forward((Status::Unauthorized, AuthError::MissingCookie))
+            None => Outcome::Forward(Status::Unauthorized)
         }
     }
 }
