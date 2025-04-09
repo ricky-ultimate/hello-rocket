@@ -30,7 +30,7 @@ impl<'r> FromRequest<'r> for User {
             Some(cookie) => {
                 if cookie.value() == "abc-xyz-123" {
                     Outcome::Success(User {
-                        user_id: "abc-xyz-123".to_string(),
+                        user_id: cookie.value().to_string(),
                         username: "rando".to_string(),
                     })
                 } else {
