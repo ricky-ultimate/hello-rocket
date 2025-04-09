@@ -2,8 +2,8 @@
 extern crate rocket;
 
 use rocket::http::Cookie;
-use rocket::http::Status;
 use rocket::http::CookieJar;
+use rocket::http::Status;
 use rocket::request::{FromRequest, Outcome, Request};
 use rocket::response::Redirect;
 
@@ -38,15 +38,17 @@ impl<'r> FromRequest<'r> for User {
                 }
             }
 
-            None => Outcome::Forward(Status::Unauthorized)
+            None => Outcome::Forward(Status::Unauthorized),
         }
     }
 }
 
-
 #[get("/")]
 fn index(user: User) -> String {
-    format!("Hello, {}! You're logged in with ID: {}", user.username, user.user_id)
+    format!(
+        "Hello, {}! You're logged in with ID: {}",
+        user.username, user.user_id
+    )
 }
 
 #[get("/", rank = 2)]
